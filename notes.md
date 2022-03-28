@@ -9,6 +9,8 @@
 - **find elements by accessibility markers, not test IDs.**
 - more philosophy later
 
+---
+
 ## Roles: React Testing Library vs JEST
 
 ### React Testing library
@@ -21,6 +23,8 @@
   - Find tests
   - run tests
   - determines whether tests pass or fail
+
+---
 
 ## Let's create the first test
 
@@ -79,6 +83,8 @@
 
   - `Unable to find an element with the text: Learn we.`
 
+---
+
 ## Assertion
 
 - `expect(linkElement).toBeInTheDocument()`
@@ -98,6 +104,8 @@
   - `.toBe()` and `.toHaveLength()` are not from jest-dom, they are very general and can be applied to any _node_ code.
   - DOM-based matchers
     - examples: `toBeVisible()` or `toBeChcked()`, more to come.
+
+---
 
 ## Jest
 
@@ -122,7 +130,8 @@
   - only run tests realted to these files
   - no changes? no tests
     - type `a` to run all tests
-    -
+
+---
 
 ## TDD
 
@@ -137,6 +146,8 @@
     - part of the coding process, not a 'chore' to do at the end
   - more efficient
     - re-run tests "for free" after changes
+
+---
 
 ## React Testing Library Philosophy
 
@@ -159,6 +170,8 @@
   - Acceptance / end-to-end (e2e) Tests
     - use actual browser and server (cypress, selenium)
 
+---
+
 ## Funcional testing vs Unit testing
 
 - Unit testing
@@ -175,6 +188,8 @@
 
 - React testing libraries believes that the advantages of Functional Testing outweighs the disavantages of Unit Testing.
 
+---
+
 ## TDD vs BDD
 
 - testing library encourages tesing the way users actually uses the app
@@ -184,6 +199,8 @@
     - developers, QA, businessa partners
   - defines a process for different groups to interact
 - In this course, only developers, so TDD!
+
+---
 
 ## Accessbility and finding elements with React Testing Library
 
@@ -213,6 +230,8 @@
   - jest-dom documentation: [https://github.com/testing-library/jest-dom](https://github.com/testing-library/jest-dom)
   - Much more about queries and roles later!
 
+---
+
 ## General Course Plan
 
 - Start with very simple React
@@ -230,4 +249,32 @@
 
 - Folks come to this course at many levels
 - Optional lectures explaining React Syntax and descions
-- Feel free to skip
+
+---
+
+## Testing styles from imported CSS modules
+
+- Testing Styles from Imported CSS Modules
+- A common question about testing styles is "why doesn't .toHaveStyle() work with classes from my imported CSS module?"
+
+### Mocking CSS modules
+
+- In the case of create-react-app applications -- or applications that have otherwise mocked css modules for Jest -- CSS module imports are simply ignored for Jest test.
+
+### Cosmetic Styles vs. Functional Styles
+
+- In many cases, the classes are merely cosmetic and won't affect functional tests (such as placement of the element on the page). In these cases, mocking the CSS modules works fine. However, sometimes classes do affect function. For example, say you have a CSS module that uses a hidden class, which results in display: none when interpreted. Without adding a Jest transformer to interpret the CSS, Testing Library will not know that hidden class would result in display: none. Tests around element visibility that rely on this class will fail.
+
+### Transformers
+
+- For styles to be interpreted in tests, you need a transformer to, well, transform the CSS classes into styles. Here are a couple options:
+
+[https://www.npmjs.com/package/jest-transform-css](https://www.npmjs.com/package/jest-transform-css)
+
+[https://www.npmjs.com/package/jest-css-modules-transform]()https://www.npmjs.com/package/jest-css-modules-transform
+
+- The latter has more downloads per week, but the former seems to be more actively maintained.
+
+### Testing for Class Name
+
+- Another possibility would be to check explicitly for the class name (hidden in this example), using toHaveClass. This would be simpler, but farther from the actual user experience (this is testing implementation details, rather than how the user sees the page). It's always a balance, and I think either this approach or transforming the CSS would be defensible.
