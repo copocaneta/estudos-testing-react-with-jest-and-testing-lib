@@ -207,3 +207,27 @@
     ```
 
   - Roles documentation: [https://www.w3.org/TR/wai-aria/#role_definitions](https://www.w3.org/TR/wai-aria/#role_definitions)
+    - some elements have built-in roles: `button`, `a` (`link`)
+  - Can't find an element like a screen reader would?
+    - Then your app isn't friendly to screen readers.
+  - jest-dom documentation: [https://github.com/testing-library/jest-dom](https://github.com/testing-library/jest-dom)
+  - Much more about queries and roles later!
+
+## General Course Plan
+
+- Start with very simple React
+  - This is so we can focus on Testing Library syntax
+- **First app**: not much of an app
+  - chaning button color, disabling button with checkbox
+  - introduce: testing interactions that affect the DOM, unit testing funtions
+- Builid up to more complex functionality and tests
+- **Second App**: design and order an ice-cream sundae
+  - testing more complex user interacitons, interactions between components
+  - mocking server responses with _Mock Service Worker_
+  - testing `async` functionality
+
+### A note about React explanations
+
+- Folks come to this course at many levels
+- Optional lectures explaining React Syntax and descions
+- Feel free to skip
