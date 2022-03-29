@@ -278,3 +278,12 @@
 ### Testing for Class Name
 
 - Another possibility would be to check explicitly for the class name (hidden in this example), using toHaveClass. This would be simpler, but farther from the actual user experience (this is testing implementation details, rather than how the user sees the page). It's always a balance, and I think either this approach or transforming the CSS would be defensible.
+
+## Unit testing functions
+
+- Functions separente from components
+  - userd by several components
+  - complex logic
+- Unit test if:
+  - complex logic difficult to test via functional tests
+  - too many edge cases
