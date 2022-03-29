@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
 
 export function replaceCamelCaseWithSpaces(colorName) {
@@ -7,10 +6,10 @@ export function replaceCamelCaseWithSpaces(colorName) {
 }
 
 function App() {
-  const [buttonColor, setButtonColor] = useState('red')
+  const [buttonColor, setButtonColor] = useState('MediumVioletRed')
   const [disabled, setDisabled] = useState(false)
 
-  const newButtonColor = buttonColor === 'red' ? 'blue' : 'red'
+  const newButtonColor = buttonColor === 'MediumVioletRed' ? 'MidnightBlue' : 'MediumVioletRed'
 
   return (
     <div>
@@ -19,7 +18,7 @@ function App() {
         onClick={() => setButtonColor(newButtonColor)}
         disabled={disabled}
       >
-        Change to {newButtonColor}
+        Change to {replaceCamelCaseWithSpaces(newButtonColor)}
       </button>
       <input
         type="checkbox"
