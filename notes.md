@@ -287,3 +287,15 @@
 - Unit test if:
   - complex logic difficult to test via functional tests
   - too many edge cases
+
+## When to use Unit Test?
+
+- When to use Unit test?
+  - `replaceCamelCaseWithSpaces()` is pretty simple
+  - could be covered by functional tests on button
+- For more compolicated functions, unit tests help with:
+  - covering all possible edge cases
+  - determining what caused functional tests to fail
+- Issue with fucntional tests:
+  - high-level makes them resistant to refactors
+  - high-level makes them difficult to diagnose
