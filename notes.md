@@ -299,3 +299,90 @@
 - Issue with fucntional tests:
   - high-level makes them resistant to refactors
   - high-level makes them difficult to diagnose
+
+## 02 - Second Project - Sundaes on demand
+
+- We created the app with
+
+  ```sh
+  npx create-react-app 02-sundaes-on-demand
+  ```
+
+### App Summary
+
+- Choose ice cream flavors and toppoings and submit order
+- Flavors and toppiungs come from server
+- order is sent to server
+
+  ![SUndaes App image 01](images/02-sundaes-app02.png)
+
+- Backdrop to test
+
+  - more complex user interacitons
+    - multiple form entry, moving through order phases
+  - mouseover popup
+    - test that element disappears from DOM
+  - simulating (mock) server response
+    - (very imoprtant part of functional testing, we do not want to have our server running)
+  - async app updates
+    - we wil learn tools with testing library where we will wait for change in the DOM before making an assertion
+  - global state via context
+    - why does it matter? we were told we were not supposed to test implementation details
+    - we will not be testing context implementaiton, we are only intesteted in testing behavior as seen by the use
+    - tests no different if we used Redux, Mobx
+    - only difference is the test setup
+      - we will make sure component is wrapped in context
+      - ensure functionality
+      - avoid errors
+
+- 3 main pages for the app
+  - Order Entry Mock-up
+    ![The order entry page](images/02-sundaes-app03.png)
+    - Shows us the scoop and topopings options are, they come from the server
+    - option to add any particular number of scoops you want
+    - toppings, you don't get to choose more than one
+    - subtotal for each section
+    - a grand total
+    - a button to order the sundae
+  - Order Summary page
+    ![The order summary page](images/02-sundaes-app04.png)
+    - Summary of scoops, toppings and total
+    - It makes we agree to terms of condtions (popover)
+    - And we can confirm the order
+  - Order confirmation page
+    ![The order confirmation page](images/02-sundaes-app05.png)
+    - We thank the customer and give the order number
+    - And we create our order
+    - And we say that as per our terms and conditions we don't delivery anything
+
+### Order phase state
+
+- The way we are going to move through these phases is by keeping track on what order phase we are in using app-level state
+- If the state is:
+
+  - `inProgress`
+    - Order Page will show
+  - `review`
+    - Order Summary page will show
+  - `completed`
+    - We will see the order confirmation page
+    - button to create new order which get us back to the `inProgres` state
+
+  ![The order phases state](images/02-sundaes-app06.png)
+
+### Server
+
+- There is a Node Express server with a rest api for this project that we cloned from the course's project repo [https://github.com/bonnie/udemy-TESTING-LIBRARY/tree/main/sundae-server](https://github.com/bonnie/udemy-TESTING-LIBRARY/tree/main/sundae-server)
+- We follow the instructions in the `README.md`:
+  - We cloned that and we run `npm install` and run the `start script`, it will start on port 3030
+- For the flavors and the toppings it just send static info
+  - In a real app this would come from a DB, in our app it comes from a file
+- For order, simply generates a random order number.
+- Server is not needed for functional react app testing!
+  - use `mock-service-worker` to mock responses from the server
+  - server for spec, **manual acceptance testing**
+
+<style>
+img{width: 30%; display: block; margin: 0 auto;}
+
+</style>
