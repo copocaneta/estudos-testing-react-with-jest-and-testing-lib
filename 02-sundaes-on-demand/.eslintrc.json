@@ -1,0 +1,48 @@
+{
+    "extends": [
+      "plugin:testing-library/react",
+      "plugin:jest-dom/recommended"
+    ],
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"],
+          "paths": ["src"]
+        }
+      }
+    },
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [
+      "testing-library",
+      "jest-dom"
+    ],
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true,
+      "jest": true
+    },
+    "rules": {
+      "testing-library/await-async-query": "error",
+      "testing-library/no-await-sync-query": "error",
+      "testing-library/no-debugging-utils": "warn",
+      "jest-dom/prefer-checked": "error",
+      "jest-dom/prefer-enabled-disabled": "error",
+      "jest-dom/prefer-required": "error",
+      "jest-dom/prefer-to-have-attribute": "error",
+      "react/prop-types": ["off"],
+      "max-lines-per-function": ["warn", 50],
+      "sort-imports": "off",
+      "import/order": "off",
+      "no-shadow": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-one-expression-per-line": "off",
+      "react/jsx-curly-newline": "off"
+    }
+  }
