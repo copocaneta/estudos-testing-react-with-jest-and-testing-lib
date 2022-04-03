@@ -382,6 +382,38 @@
   - use `mock-service-worker` to mock responses from the server
   - server for spec, **manual acceptance testing**
 
+## screen Query Methods
+
+### `command[All]ByQueryType`
+
+- command
+
+  - `get`: expect element to be in DOM
+  - `query`: expect alement _not_ to be in DOM
+  - `find`: expect element to appear async
+    - (when we want to wait for an async update to the DOM before running our assertions)
+
+- [All]
+
+  - (exclude) expect only one match
+  - (include) expect more than one match
+
+- QueryType
+  - what we are searching by
+  - `Role` (most prefered)
+  - `AltText` (images)
+  - `Text` (display elements)
+  - Form elements
+    - `PlaceholderText`
+    - `LabelText`
+    - `DisplayValue`
+
+### `screen` Query Reference
+
+- [https://testing-library.com/docs/dom-testing-library/api-queries](https://testing-library.com/docs/dom-testing-library/api-queries)
+- [https://testing-library.com/docs/react-testing-library/cheatsheet](https://testing-library.com/docs/react-testing-library/cheatsheet)
+- [https://testing-library.com/docs/queries/about#priority](https://testing-library.com/docs/queries/about#priority)
+
 <style>
 img{width: 30%; display: block; margin: 0 auto;}
 
