@@ -414,6 +414,19 @@
 - [https://testing-library.com/docs/react-testing-library/cheatsheet](https://testing-library.com/docs/react-testing-library/cheatsheet)
 - [https://testing-library.com/docs/queries/about#priority](https://testing-library.com/docs/queries/about#priority)
 
+## `not wrapped in act(..)` warning
+
+- React updated element after test was finished
+- Don't want to follow the advice to wrap it in `act(...)`
+  - Testing Library already does this for us
+  - [https://testing-library.com/docs/preact-testing-library/api/#act](https://testing-library.com/docs/preact-testing-library/api/#act)
+- To remedy this error:
+  - Determine what changes after the test is over (async)
+  - Account for that change in our test
+    - awaiting the change, and
+    - asserting on it
+  - More info: [https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning](https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning)
+
 <style>
 img{width: 30%; display: block; margin: 0 auto;}
 
