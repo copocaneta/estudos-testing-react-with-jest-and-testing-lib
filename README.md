@@ -427,6 +427,67 @@
     - asserting on it
   - More info: [https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning](https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning)
 
+## Mock Service Worker
+
+- Purpose
+  - intercept network calls
+  - return specified responses
+- Prevents network calls during tests
+- Set up test conditions using server responses
+
+### Mock Service Worker setup
+
+- first we must install it
+  - `npm install msw`
+- Create handlers
+- Create test server
+- Make sure test server is listening during all tests
+  - reset after each test
+- docs: [https://mswjs.io/docs/getting-started/mocks/rest-api](https://mswjs.io/docs/getting-started/mocks/rest-api)
+
+### Mock Service Worker Handler
+
+- `rest.get('http://localhost:3030/scoops', (req, res, ctx) => {})`
+
+- Handler Type: `rest` or `graphql`
+  - HTTP Method: `get`, `post`, etc
+    - Full URL to mock
+      - Response resolver function
+        - `req`: request object
+        - `res`: function to create response
+        - `ctx`: utiility to build response
+        - [https://mswjs.io/docs/basics/response-resolver](https://mswjs.io/docs/basics/response-resolver)
+
+### Configure the server
+
+- [https://mswjs.io/docs/getting-started/integrate/node](https://mswjs.io/docs/getting-started/integrate/node)
+
+- `src/mocks/server.js`:
+  ```js
+  // src/mocks/server.js
+  import { setupServer } from 'msw/node'
+  import { handlers } from './handlers'
+  // This configures a request mocking server with the given request handlers.
+  export const server = setupServer(...handlers)
+  ```
+
+### Configure create-react-app so MSW intercept network requests and returns responses
+
+- [https://mswjs.io/docs/getting-started/integrate/node#using-create-react-app](https://mswjs.io/docs/getting-started/integrate/node#using-create-react-app)
+- Modify the `src/setupTests.js` tests setup file:
+
+  ```js
+  // src/setupTests.js
+  import { server } from './mocks/server.js'
+  // Establish API mocking before all tests.
+  beforeAll(() => server.listen())
+  // Reset any request handlers that we may add during the tests,
+  // so they don't affect other tests.
+  afterEach(() => server.resetHandlers())
+  // Clean up after the tests are finished.
+  afterAll(() => server.close())
+  ```
+
 <style>
 img{width: 30%; display: block; margin: 0 auto;}
 
