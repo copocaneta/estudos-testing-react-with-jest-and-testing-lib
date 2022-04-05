@@ -488,6 +488,10 @@
   afterAll(() => server.close())
   ```
 
+## `await findBy`
+
+- **when we are waiting for something to appear asynchronously on the page, we MUST USE `await findBy`**
+
 <style>
 img{width: 30%; display: block; margin: 0 auto;}
 
