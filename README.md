@@ -492,6 +492,17 @@
 
 - **when we are waiting for something to appear asynchronously on the page, we MUST USE `await findBy`**
 
+## Review for Project 02 - "scoops" testing
+
+- Mock Service Worker mimics response from server
+  - create handler
+  - create server
+  - update `setupTests` to list for requests
+- `getAllByRole`
+  - seartch for more than one match to role
+- `await findAllByRole`
+  - for asynchronous DOM update of elements
+
 <style>
 img{width: 30%; display: block; margin: 0 auto;}
 
