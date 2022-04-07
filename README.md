@@ -39,14 +39,14 @@
 - `create-react-app` comes with a pre built test that already passes, it's this:
 
   ```js
-  import { render, screen } from '@testing-library/react'
-  import App from './App'
+  import { render, screen } from '@testing-library/react';
+  import App from './App';
 
   test('renders learn react link', () => {
-    render(<App />)
-    const linkElement = screen.getByText(/learn react/i)
-    expect(linkElement).toBeInTheDocument()
-  })
+    render(<App />);
+    const linkElement = screen.getByText(/learn react/i);
+    expect(linkElement).toBeInTheDocument();
+  });
   ```
 
 - `render`:
@@ -69,14 +69,14 @@
 - We can update the test to make it fail:
 
   ```js
-  import { render, screen } from '@testing-library/react'
-  import App from './App'
+  import { render, screen } from '@testing-library/react';
+  import App from './App';
 
   test('renders learn react link', () => {
-    render(<App />)
-    const linkElement = screen.getByText(/learn testing library/i)
-    expect(linkElement).toBeInTheDocument()
-  })
+    render(<App />);
+    const linkElement = screen.getByText(/learn testing library/i);
+    expect(linkElement).toBeInTheDocument();
+  });
   ```
 
 - And since this doesn't exist in our component the test will fail:
@@ -213,14 +213,14 @@
   - So we could rewrite it like this:
 
     ```js
-    import { render, screen } from '@testing-library/react'
-    import App from './App'
+    import { render, screen } from '@testing-library/react';
+    import App from './App';
 
     test('renders learn react link', () => {
-      render(<App />)
-      const linkElement = screen.getByRole('link', { name: /learn react/i })
-      expect(linkElement).toBeInTheDocument()
-    })
+      render(<App />);
+      const linkElement = screen.getByRole('link', { name: /learn react/i });
+      expect(linkElement).toBeInTheDocument();
+    });
     ```
 
   - Roles documentation: [https://www.w3.org/TR/wai-aria/#role_definitions](https://www.w3.org/TR/wai-aria/#role_definitions)
@@ -465,10 +465,10 @@
 - `src/mocks/server.js`:
   ```js
   // src/mocks/server.js
-  import { setupServer } from 'msw/node'
-  import { handlers } from './handlers'
+  import { setupServer } from 'msw/node';
+  import { handlers } from './handlers';
   // This configures a request mocking server with the given request handlers.
-  export const server = setupServer(...handlers)
+  export const server = setupServer(...handlers);
   ```
 
 ### Configure create-react-app so MSW intercept network requests and returns responses
@@ -478,14 +478,14 @@
 
   ```js
   // src/setupTests.js
-  import { server } from './mocks/server.js'
+  import { server } from './mocks/server.js';
   // Establish API mocking before all tests.
-  beforeAll(() => server.listen())
+  beforeAll(() => server.listen());
   // Reset any request handlers that we may add during the tests,
   // so they don't affect other tests.
-  afterEach(() => server.resetHandlers())
+  afterEach(() => server.resetHandlers());
   // Clean up after the tests are finished.
-  afterAll(() => server.close())
+  afterAll(() => server.close());
   ```
 
 ## `await findBy`
@@ -503,7 +503,37 @@
 - `await findAllByRole`
   - for asynchronous DOM update of elements
 
+## Server Errors: Planning
+
+- Fill in that `catch` statement we left as TODO
+- Display `AlertBanner` component if `axios` throws an error
+  - instead of content from server
+- Use a simple react-bootstrap alert
+  - [https://react-bootstrap.netlify.app/components/alerts](https://react-bootstrap.netlify.app/components/alerts)
+  - role: `alert`
+- By default, handlers return non-error response
+  - Override with error response for particular tests
+
+### Jest Debugging Tools
+
+- Jest debugging tools in this section
+  - running only one test file
+  - running only one test within a file
+- To give us something to debug
+  - Going to write code we know we won't pass
+
+## `waitFor()`
+
+- When in need to wait for any period of time you can `use` waitFor, to wait for your expectations to pass.
+
+- `waitFor` may run the callback a number of times until the timeout is reached. Note that the number of calls is constrained by the timeout and interval options.
+
+- This can be useful if you have a unit test that mocks API calls and you need to wait for your mock promises to all resolve.
+
+- [https://testing-library.com/docs/dom-testing-library/api-async#waitfor](https://testing-library.com/docs/dom-testing-library/api-async#waitfor)
+
 <style>
 img{width: 30%; display: block; margin: 0 auto;}
+
 
 </style>
