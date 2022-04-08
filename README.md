@@ -532,8 +532,23 @@
 
 - [https://testing-library.com/docs/dom-testing-library/api-async#waitfor](https://testing-library.com/docs/dom-testing-library/api-async#waitfor)
 
+## Context
+
+### Context file
+
+- Kent C. Dodds pattern to set up context with embedded state
+- [https://kentcdodds.com/blog/application-state-management-with-react](https://kentcdodds.com/blog/application-state-management-with-react)
+
+![Our App Context Diagram](images/app_context_diagram.png)
+
+- `useMemo`:
+  - The React useMemo Hook returns a memoized value.
+  - Think of memoization as caching a value so that it does not need to be recalculated.
+  - The useMemo Hook only runs when one of its dependencies update.
+  - This can improve performance.
+
 <style>
-img{width: 30%; display: block; margin: 0 auto;}
+img{width: 50%; display: block; margin: 0 auto;}
 
 
 </style>
