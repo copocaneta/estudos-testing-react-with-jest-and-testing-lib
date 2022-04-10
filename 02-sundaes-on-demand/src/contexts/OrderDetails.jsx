@@ -1,7 +1,19 @@
+import React from 'react';
 import { createContext, useContext, useState, useMemo, useEffect } from 'react';
 import { pricePerItem } from '../constants';
 
-const OrderDetails = createContext(undefined);
+// formart number as currency
+
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2
+  }).format(amount);
+};
+
+// @ts-ignore
+const OrderDetails = createContext();
 
 // create custom hook to check if we are inside of a provider
 
@@ -28,20 +40,22 @@ export const OrderDetailsProvider = (props) => {
     toppings: new Map()
   });
 
+  const zeroCurrency = formatCurrency(0);
+
   const [totals, setTotals] = useState({
-    scoops: 0,
-    toppings: 0,
-    grandTotal: 0
+    scoops: zeroCurrency,
+    toppings: zeroCurrency,
+    grandTotal: zeroCurrency
   });
 
   useEffect(() => {
     const scoopsSubTotal = calculateSubtotal('scoops', optionCounts);
-    const toppingsSubtotal = calcualteSubtotal('toppings', optionCounts);
+    const toppingsSubtotal = calculateSubtotal('toppings', optionCounts);
     const grandTotal = scoopsSubTotal + toppingsSubtotal;
     setTotals({
-      scoops: scoopsSubTotal,
-      toppings: toppingsSubtotal,
-      grandTotal
+      scoops: formatCurrency(scoopsSubTotal),
+      toppings: formatCurrency(toppingsSubtotal),
+      grandTotal: formatCurrency(grandTotal)
     });
   }, [optionCounts]);
 
@@ -49,6 +63,7 @@ export const OrderDetailsProvider = (props) => {
     function updateItemCount(itemName, newItemCount, optionType) {
       setOptionCounts((prevState) => {
         // get option Map and make a copy
+        // @ts-ignore
         const { [optionType]: optionMap } = prevState;
         const newOptionMap = new Map(optionMap);
 

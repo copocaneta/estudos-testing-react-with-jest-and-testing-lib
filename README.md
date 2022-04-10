@@ -547,6 +547,14 @@
   - The useMemo Hook only runs when one of its dependencies update.
   - This can improve performance.
 
+## Wrapping globally to all rendered components:
+
+- How to apply a wrapper (could be a Context Provider) globally to all the components we render in our tests
+- [https://testing-library.com/docs/react-testing-library/setup](https://testing-library.com/docs/react-testing-library/setup)
+- Setup:
+  - create a file called `test-utils.js`
+  - instead of importing from `'@testing-library/react'`, we are going to import from `test-utils.js` which will override the `render`
+
 <style>
 img{width: 50%; display: block; margin: 0 auto;}
 
