@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen, waitFor } from '../../../test-utils/testing-library-utils';
 import OrderEntry from '../OrderEntry';
 import { rest } from 'msw';
