@@ -555,8 +555,49 @@
   - create a file called `test-utils.js`
   - instead of importing from `'@testing-library/react'`, we are going to import from `test-utils.js` which will override the `render`
 
+## `Cannot log after tests are done.`
+
+- It's ok to ignore this when our tests are not done yet.
+
+## Project 02 - Review so far (not done)
+
+### Review what we covered for the subtotal update testing for scoops
+
+- `getByText` to find the total
+  - `exact` option set to false (we gave it a string, partial match)
+- number inputs
+  - `await` and `findBy` (coming from server async)
+  - `spinbutton` role
+  - `userEvent.clear` to clear existing text
+  - `userEvent.type` to enter number
+- `wrapper` option to `render` in order to apply context provider
+- Redefined Testing Library `render` to acess the context provider universally
+
+## `Warning: Can't perform a React state update on an unmounted component.` error
+
+### Options to remedy:
+
+- Skip auto cleanup
+  - [https://testing-library.com/docs/react-testing-library/setup/#skipping-auto-cleanup](https://testing-library.com/docs/react-testing-library/setup/#skipping-auto-cleanup)
+  - Not possible on a test-by-test basis
+  - not recommended
+- Mock `useEffect` to bypass server call
+  - Not recommended, farther from production code path
+  - makes test less connected as to what is going on to the user
+- Include in the begining of a test that asserts on state changes
+  - One that awaits state changes
+    - happen on axios promise resolution
+  - Don't need to include in all tests because it only needs to be tested once
+
+### What is there is no test?
+
+- Add `await`s to the end of the test to avoid errors
+- Bonnie doesn't love this as a solution
+-
+
 <style>
 img{width: 50%; display: block; margin: 0 auto;}
+
 
 
 </style>
