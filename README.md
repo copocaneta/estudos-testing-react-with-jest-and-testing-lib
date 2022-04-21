@@ -593,7 +593,29 @@
 
 - Add `await`s to the end of the test to avoid errors
 - Bonnie doesn't love this as a solution
--
+
+## Debugging Tips
+
+- `screen.debug()`
+  - this will print out in our test output what the `screen` (or what the DOM) looks like at that point
+  - useful so we can get an idea of why we can't find something
+- Does `getBy`\* fail when there is a server call or other `async` function?
+  - Use `await findBy*`
+- Read test error output carefully
+  - don't get intimidated by huge walls of text
+  - exactly which assertion is failing?
+  - copy/paste errors into web search
+
+### Resolving errors from Tests
+
+- `Unable to find role="role" `
+  - either role (for example, `button`), doesn't exist, or no element with that role that also matches `name` option
+- `Warning: An update to component inside a test was not wrapped in act(...)`
+  - There was an update after the test completed. Use `await findBy*`.
+- `Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indecates a memory leak in your application.`
+  - There was an update to the component state after the test completed. Use `await findBy*`
+- `Error connect ECONNREFUSED 127.0.0.1`
+  - There is no Mock Service Worker handler associated with this route and method.
 
 <style>
 img{width: 50%; display: block; margin: 0 auto;}
