@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import React from 'react';
 import { createContext, useContext, useState, useMemo, useEffect } from 'react';
 import { pricePerItem } from '../constants';
@@ -68,9 +69,15 @@ export const OrderDetailsProvider = (props) => {
         return newOptionCounts;
       });
     }
+    function resetOrder() {
+      setOptionCounts({
+        scoops: new Map(),
+        toppings: new Map()
+      });
+    }
     // getter: object containing option counts for scoops and toppings and subtotals and totals
     // setter: updateOptionCounts
-    return [{ ...optionCounts, totals }, updateItemCount];
+    return [{ ...optionCounts, totals }, updateItemCount, resetOrder];
   }, [optionCounts, totals]);
   return <OrderDetails.Provider value={value} {...props} />;
 };

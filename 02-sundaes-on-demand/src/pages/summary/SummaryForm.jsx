@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Form, Button, Popover, OverlayTrigger } from 'react-bootstrap'
+import React, { useState } from 'react';
+import { Form, Button, Popover, OverlayTrigger } from 'react-bootstrap';
 
 //   const Example = () => (
 //     <OverlayTrigger trigger="click" placement="right" overlay={popover}>
@@ -9,18 +9,21 @@ import { Form, Button, Popover, OverlayTrigger } from 'react-bootstrap'
 
 //   render(<Example />);
 
-const SummaryForm = () => {
-  const [buttonDisable, setButtonDisable] = useState(false)
+const SummaryForm = ({ setOrderPhase }) => {
+  const [buttonDisable, setButtonDisable] = useState(false);
 
   const popover = (
     <Popover id="popover-basic">
       <Popover.Body>No ice cream will actually be delivered</Popover.Body>
     </Popover>
-  )
+  );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Group>
             <Form.Check id="terms-checkbox" type="checkbox" onChange={(e) => setButtonDisable(e.target.checked)} />
@@ -31,13 +34,13 @@ const SummaryForm = () => {
               </OverlayTrigger>
             </Form.Label>
           </Form.Group>
-          <Button variant="primary" type="Submit" disabled={!buttonDisable}>
+          <Button variant="primary" type="submit" disabled={!buttonDisable} onClick={() => setOrderPhase('complete')}>
             Confirm Order
           </Button>
         </Form.Group>
       </Form>
     </>
-  )
-}
+  );
+};
 
-export default SummaryForm
+export default SummaryForm;
