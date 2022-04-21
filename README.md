@@ -617,6 +617,40 @@
 - `Error connect ECONNREFUSED 127.0.0.1`
   - There is no Mock Service Worker handler associated with this route and method.
 
+## Jest Mocks as Props
+
+- To pass a Jest mock as a function prop to a component in a test.
+
+- In this last test we added a prop to top level page components
+  - `setOrderPhase`
+- Other components also have functions as props
+  - `updateItemCount` for the `ScoopOption` / `ToppingOption` components
+- May need to pass as prop when rendering in tests
+  - TypeScript, `PropTypes` or other prop validators will require
+  - Or will get called in tests but doesn't matter for test
+    - Testing that scoop count is invalid will call `updateItemCount`
+
+### Solution is Passing a Jest Mock function as a Prop
+
+- How to opass when rednering component in test?
+- `jest.fn()`
+  - Jest mock function
+  - Does not do anything
+  - Merely a placeholder to avoid errors
+- Example:
+
+  ```jsx
+  <ScoopOption name="Vanilla" imagePath="images/vanilla.png" updateItemCount={jest.fn()} />
+  ```
+
+## Common mistakes with React Testing Library
+
+- Now that you've completed the content portion of the course, you might want to take a look at Kent C. Dodd's post on Common Mistakes with React Testing Library. A lot of these recommendations have been covered in the course (for example, use \*byRole when possible, and user-event over fireEvent), and some of them are holdovers from previous versions that don't apply if you're starting with the latest version (for example, destructuring the render return value rather than using screen).
+
+- Mostly, it's a great to reinforce the best practices introduced in the course!
+
+- [Here is the link to the article](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
+
 <style>
 img{width: 50%; display: block; margin: 0 auto;}
 
