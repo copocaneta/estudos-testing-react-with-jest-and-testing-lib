@@ -1,9 +1,10 @@
-import { screen, render, findByText } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 
 import App from '../App';
 
+// eslint-disable-next-line max-lines-per-function
 test('order phases for happy path', async () => {
   // render the app
   render(<App />);
@@ -32,6 +33,14 @@ test('order phases for happy path', async () => {
   const confirmOrder = screen.getByRole('button', { name: /Confirm order/i });
   userEvent.click(termsCondCheckbox);
   userEvent.click(confirmOrder);
+  // check if loading appears in the confirmation page
+  const loadingElement = screen.getByText('Loading');
+  expect(loadingElement).toBeInTheDocument();
+  // check if after 'loading' text appears it disapears
+  const thankyouElement = await screen.findByText('Thank you', { exact: false });
+  expect(thankyouElement).toBeInTheDocument();
+  const notLoadingElement = screen.queryByText('Loading');
+  expect(notLoadingElement).not.toBeInTheDocument();
   // confirm order number on confirmation page
   const orderNumber = await screen.findByText('Your order number', { exact: false });
   expect(orderNumber).toBeInTheDocument();
@@ -43,5 +52,7 @@ test('order phases for happy path', async () => {
   const toppingsTotal = await screen.findByText('Toppings total:', { exact: false });
   expect(scoopsTotal).toHaveTextContent(/0.00/);
   expect(toppingsTotal).toHaveTextContent(/0.00/);
+  await screen.findByRole('spinbutton', { name: 'Vanilla' });
+  await screen.findByRole('checkbox', { name: 'Cherries' });
   // do we need to await anything to avoid test errors?
 });

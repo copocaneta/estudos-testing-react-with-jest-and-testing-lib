@@ -651,6 +651,22 @@
 
 - [Here is the link to the article](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
 
+## Standard Quesitons to Ask when adding a new Test
+
+- What to render?
+  - what's the smallest component that encompasses tests?
+- Do we need to pass any props?
+- Do we need to wrap in, say, `OrderDetailsProvider`?
+  - Does the provider get used? Is it already within the component?
+- Where should the test go?
+  - which file? New file needed?
+- What to test?
+  - What's the actual behavior that needs testing?
+- How to test?
+  - What queries and events?
+- Do we need to `await`?
+  - Is there anything asynchronous going on?
+
 <style>
 img{width: 50%; display: block; margin: 0 auto;}
 

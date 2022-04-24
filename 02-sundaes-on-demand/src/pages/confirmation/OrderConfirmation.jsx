@@ -26,7 +26,7 @@ const OrderConfirmation = ({ setOrderPhase }) => {
     <Container>
       <Row className="justify-content-md-center">
         {orderNumber === null ? (
-          'Loading'
+          <p>Loading</p>
         ) : (
           <Col>
             <h1>Thank you!</h1>
